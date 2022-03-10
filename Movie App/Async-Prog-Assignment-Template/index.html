@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+</head>
+<link rel="stylesheet" href="./styles/index.css">
+<body>
+    <div id="nav">
+        <!--Show nav here-->
+        <ul>
+            <li>
+                <h3><a href="./index.html">Home</a></h3>
+            </li>
+
+            <li>
+                <a href="./login.html">Login</a>
+            </li>
+            <li> <a href="./signup.html">Sign up</a> </li>
+        </ul>
+    </div>
+    <div id="slideshow">
+
+    </div>
+
+    <div id="sort-buttons">
+
+        <!--Add sorting here-->
+        <select name="" id="sort" onchange="sortfunc()">
+            <option >Choose Filter</option>
+            <option value="Drama">Drama</option>
+            <option value="Romance">Romance</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Horor">Horor</option>
+    
+        </select>
+        <a href="./index.html" style="color: black;">Reset</a>
+    </div>
+    <div id="movies">
+        <!--Show list of movies here-->
+    </div>
+</body>
+
+</html>
+<script src="./scripts/index.js"></script>
+<script src="./scripts/MovieData.js"></script>
