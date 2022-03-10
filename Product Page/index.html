@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add Product</title>
+  </head>
+      <style>
+        #menu{
+          margin-top: 20px;
+          text-align: center;
+        }
+        #show_products{
+          text-align: center;
+          text-decoration: none;
+          border: 1px solid green;
+          background-color: green;
+          color: white;
+          margin: auto;
+          padding: 1%;
+          font-size: 20px;
+          border-radius: 10px;
+        }
+        #show_products:hover{
+          background-color: orange;
+          color: black;
+        }
+        h2{
+          text-align: center;
+        }
+        #product_form{
+          display: flex;
+          flex-direction: column;
+          width: 250px;
+          margin: auto;
+          justify-content: center;
+          align-items: center;
+          background-color: rgb(230, 118, 14);
+          border-radius: 10px;
+          padding: 20px;
+          
+        }
+        #product_form input,div{
+          margin: 5px;
+          padding: 10px;
+        }
+        #product_form input{
+          border-radius: 5px;
+          border: none;
+        }
+        #submit{
+          width: 60%;
+          border-radius: 5px;
+          border: none;
+          
+        }
+        #submit:hover{
+          background-color: teal;
+          
+        }
+      </style>
+  <body>
+    <div id="menu">
+      <!--Create Show Products button here, give id as "show_products". avoid making spelling mistakes in HTML id's-->
+      <a href="./inventory.html" id="show_products" target="blank"> Show Products</a>
+    </div>
+    <div>
+      <h2>Add Products</h2>
+      <!--Create a form here to accept product data from user, give form HTML id as "product_form"-->
+      <form id="product_form">
+          <input type="text" id="name" placeholder="Name">
+          <input type="number" id="price" placeholder="Price">
+          <div> <label for="">Type :  </label>
+            <select name="" id="type" >
+            <option value="sneaker">sneaker</option>  
+            <option value="sports">sports</option>  
+            <option value="loafers ">loafers </option>  
+          </select></div>
+         
+          <input type="text" id="image" placeholder="image" >
+          <input type="submit" id="submit">
+
+      <!--Create four inputs to accept name, price, type and image-->
+      <!--give the inputs following respective id's, "name", "price","type","image"-->
+      <!--create a submit option to submit form, give it html id as "submit"-->
+      </form>
+    </div>
+  </body>
+</html>
+
+<script src="./scripts/index.js"></script>

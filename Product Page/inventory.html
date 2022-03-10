@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Show Product</title>
+  </head>
+
+  <style>
+            #menu{
+          margin-top: 20px;
+          text-align: center;
+        }
+        #add_product{
+          text-align: center;
+          text-decoration: none;
+          border: 1px solid green;
+          background-color: green;
+          color: white;
+          margin: auto;
+          padding: 1%;
+          font-size: 20px;
+          border-radius: 10px;
+          
+        }
+        #add_product:hover{
+          background-color: orange;
+          color: black;
+        }
+        #products_data{
+          margin-top: 5%;
+          display: grid;
+          grid-template-columns: repeat(4,1fr);
+          grid-gap: 25px;
+        
+
+        }
+        #products_data .card{
+          width: 300px;
+          text-align: center;
+          padding: 1.5%;
+          border-radius: 20px;
+          box-shadow: 0px 0px 10px black;
+          background-color: antiquewhite;
+
+        }
+        #products_data img{
+          width: 100%;
+          height: 200px;
+          object-fit: contain;
+          border-radius: 15px;
+        }
+
+        #products_data button{
+          background-color: green;
+          color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 5px;
+          margin: 5px;
+          width: 100px;
+          font-size: 15px;
+          margin-bottom: 10px;
+        }
+  </style>
+
+  <body>
+    <div id="menu">
+      <!--Create Add Product button here, give id as "add_product". avoid making spelling mistakes in HTML id's-->
+      <a href="./index.html" id="add_product" > Add Products</a>
+    </div>
+    <div id="products_data">
+      <!--append all products data here in grid format-->
+    </div>
+  </body>
+</html>
+
+<script src="./scripts/inventory.js"></script>
