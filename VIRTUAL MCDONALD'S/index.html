@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIRTUAL MCDONALD'S</title>
+</head>
+
+<style>
+ 
+    #show_food > div > img{
+        width:100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    h2{
+        color: red;
+    }
+
+#submit{
+    width: 100px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+#submit:hover{
+    background-color: orange;
+}
+.food_system{
+   display: flex;
+   
+
+}
+#show_food{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+
+}
+#show_food > div{
+    width:400px;
+    height: 400px;;
+    padding: 10px;
+
+    margin: 30px;
+}
+#show_time{
+    text-align: center;
+}
+</style>
+
+<body>
+    <h1 style="text-align: center;">VIRTUAL MCDONALD'S 🍕🍕</h1>
+    <hr>
+    
+
+    <h2> Food Menu</h2> 
+ <div class="food_system">
+     <div>
+<form action="" id="form" >
+    <input type="checkbox" id="rice"  value="Fried_Rice">
+    <label for="Food1"> Fried Rice</label><br>
+    <input type="checkbox" id="burger"  value="Burger">
+    <label for="Food2"> Burger</label><br>
+    <input type="checkbox" id="momos"  value="Momos">
+    <label for="Food3"> Momos</label><br>
+    <input type="checkbox" id="pizza"  value="Pizza">
+    <label for="Food4"> Pizza</label><br>
+    <input type="checkbox" id="ice"  value="Ice">
+    <label for="Food5"> Ice-Cream</label><br>
+    <input type="checkbox" id="roti"  value="Roti">
+    <label for="Food6"> Roti</label><br>
+    <input type="checkbox" id="Coca-Cola"  value="Coca_Cola">
+    <label for="Food7"> Coca-Cola</label><br><br>
+    <button id="submit">Order Food</button>
+  </form>
+</div>
+    
+        <div id="show_food">
+            
+        </div>
+        <div id="show_time"></div>
+</div>  
+
+</body>
+</html>
+<script>
+
+var obj = {
+    Fried_Rice:"https://i0.wp.com/www.nigerianlazychef.com/wp-content/uploads/2015/04/IMG_1755-2.jpg",
+    Burger:"https://cmx.weightwatchers.com/assets-proxy/weight-watchers/image/upload/v1594406683/visitor-site/prod/ca/burgers_masthead_xtkxft",
+    Momos: "https://th.bing.com/th/id/OIP.W_vYhH5VOqc1wDbKmM15YQHaEo?pid=ImgDet&rs=1",
+    Pizza:"https://img3.mashed.com/img/gallery/you-should-never-fold-pizza-slices-heres-why/l-intro-1602105889.jpg",
+    Coca_Cola :"https://dehayf5mhw1h7.cloudfront.net/wp-content/uploads/sites/114/2017/07/27152836/shutterstock_193222433.jpg",
+    Ice:"https://b.zmtcdn.com/data/pictures/chains/0/800910/acfe0626c6e4f2ac89d41b1d5ff461db_o2_featured_v2.jpg?output-format=webp",
+    Roti:"https://b.zmtcdn.com/data/pictures/chains/4/800424/b55b1bb8a4ed117708e384ce934b3ac0_o2_featured_v2.jpg",
+}
+
+
+
+document.getElementById("submit").addEventListener("click",function(e){
+    
+    document.getElementById("show_food").innerHTML = "";
+
+    e.preventDefault();
+    let check = document.querySelectorAll('input[type = "checkbox"]:checked');
+
+    let val =[];
+    check.forEach(function(item){
+        val.push(item.value)
+    })
+    for(let i=0;i<val.length;i++){
+        order(val[i])
+    }
+
+})
+
+function order(food){
+    let status = "open";
+    let promise = new Promise(function(resolve,reject){
+        let time = Math.round(Math.random() * 5000);
+        var h3 = document.createElement("h3");
+        h3.innerHTML = `Please Wait ${Math.ceil(time/1000)}'s to ready your ${food}`;
+        document.getElementById("show_time").append(h3);
+        if(status =="closed"){
+            reject("Sorry, shop are closed");
+        }
+        else{
+            setTimeout(function (){
+                resolve("Your order for "+food+" is ready");
+               
+            },time)
+        }
+    })
+
+    promise.then(function(message){
+        let div = document.createElement("div");
+        let img = document.createElement("img");
+        img.src = obj[food];
+        div.append(img);
+        document.getElementById("show_food").append(div);
+        document.getElementById("show_time").innerText = "";
+        document.getElementById("form").reset();
+        
+    }).catch(function(message){
+       alert(message);
+    })
+
+    document.getElementById("show_food").innerHTML = "";
+    }
+
+
+
+</script>
+
+
