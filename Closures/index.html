@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closures</title>
+</head>
+<style>
+        #form{
+    margin: 20px;
+    text-align: center;
+    }
+    #form input{
+        padding: 10px 100px 10px 10px;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    #form input:focus{
+        border: 2px solid orangered;
+        outline: none;
+    }
+    #query{
+        width: 200px;
+    }
+    #movies{
+        max-height: 300px;
+        width: 290px;
+        /* border: 1px solid black; */
+        box-shadow: 0 2px 8px black;
+        border-top:none ;
+        display: none;
+        overflow:hidden;
+        margin: auto;
+        padding: 10px;
+        position: relative;
+        margin-top: -20px;
+    }
+    #movies > p:hover{
+        background-color: orangered;
+        
+    }
+
+
+    .show{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        width: 80%;
+        height: 330px;
+        margin: auto;
+        grid-gap: 25px;
+        position: absolute;
+        z-index: -1;
+        
+    }
+    .show > div{
+        /* border: 2px solid rgba(255, 0, 0, 0.692); */
+        box-shadow: 0px 2px 12px black;
+        border-radius: 15px;
+        padding: 10px;
+        text-align: center;
+
+    }
+    .show > div > img{
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        border-radius: 15px;
+    }
+
+</style>
+<body>
+    
+<div id="form">
+    <h1>Search Movie </h1>
+    <input oninput="debounce(main,500)" type="text" id="query" placeholder="Search">
+
+</div>
+<div id="movies">
+
+</div>
+
+<div class="show">
+
+</div>
+</body>
+</html>
+
+<script>
+let timerId;
+async function searchMovies(){
+    let input =document.getElementById('query').value;
+    try {
+        let response = await fetch(`https://www.omdbapi.com/?s=${input}&apikey=7dcdc1d8`);
+        let data = await response.json();
+        return data.Search
+        // appendMovies(data.Search)
+        // console.log('data:', data)
+        } catch (error) {
+            console.log(error);
+        }
+}
+
+function  appendMovies(data){
+    document.getElementById('movies').innerHTML = '';
+
+    data.forEach(function(e) {
+        
+
+        let p = document.createElement('p');
+        p.innerHTML = e.Title;
+        p.style.cursor = 'pointer';
+        
+        p.addEventListener("click",function(){
+            showMovie(e)
+            document.getElementById('movies').style.display = 'none';
+        })
+
+        document.getElementById('movies').append(p);
+        document.getElementById('movies').style.display = 'block'; 
+    });
+
+}
+async function main(){
+    try {
+        let data = await searchMovies();
+        if(data == undefined){
+            document.getElementById('movies').style.display = 'none';
+            return;
+        }
+        appendMovies(data);
+
+    } catch (error) {
+        console.log(error);
+    }
+        
+}
+
+
+function debounce(func, delay){
+    if(timerId){
+        clearTimeout(timerId);
+    }
+    
+    timerId = setTimeout(function(){
+        func();
+    },delay);
+}
+
+
+function showMovie(data){
+
+    let div = document.createElement('div');
+    let img = document.createElement('img');
+    img.src = data.Poster;
+    
+    let title = document.createElement('h3');
+    title.innerHTML = data.Title;
+
+    let year = document.createElement('h4');
+    year.innerHTML = data.Year;
+
+    let type = document.createElement('h4');
+    type.innerHTML = data.Type;
+
+    div.append(img,title,year,type);
+    document.querySelector(".show").append(div);
+
+}
+</script>
