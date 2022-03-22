@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+     #form{
+         width: 100%;
+            height: 300px;    
+        background: url("https://th.bing.com/th/id/OIP.O769s4qgMoXdvmdzKRX4tQHaEK?pid=ImgDet&rs=1");
+               /* opacity: 0.5; */
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                position: relative;
+                top: 0;
+    text-align: center;
+    }
+    #form > div{
+        position: absolute;
+        transform: translateY(-50%,-50%);
+        top: 50%;
+        left: 50%;
+    }
+    #form input{
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+    #form input:focus{
+        border: 2px solid orangered;
+        outline: none;
+    }
+    #form button{
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 18px;
+        background-color: teal;
+        color: white;
+        border: none;
+    }
+    #form button:hover{
+        background-color: orangered;
+        cursor: pointer;
+    }
+    .container{
+        margin: 20px;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+    }
+    iframe{
+        width: 60%;
+        height: 400px;
+        /* border: 1px solid black; */
+        border-radius: 10px;
+        box-shadow: 0 2px 10px lightgray;
+    }
+    .container > div{
+       
+        text-align: left;
+        box-shadow: 0 2px 12px lightgray;
+        padding: 20px;
+        width: 30%;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: orangered;
+
+
+
+    }
+    </style>
+</head>
+
+<body>
+    <div id="form">
+        <div>
+    <input type="search" id="city" placeholder="Enter Your City ">
+    <button onclick="getWeather()">Get Weather</button>
+</div>
+</div>
+    <div class="container">
+
+    </div>
+
+</body>
+</html>
+
+<script>
+
+
+async function getWeather(){
+    try{
+        let city = document.getElementById('city').value;
+        let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=cfe9e69a7c982e72df3109905e617e43&units=metric`);
+        let data = await response.json();
+        // data = data.main.temp;
+        // console.log(data);
+        appendData(data)
+    }catch(err){
+        // console.log(err);
+        alert("City Not Found");    
+    }
+
+
+    function appendData(data){
+        document.querySelector('.container').innerHTML = null
+        var div = document.createElement('div');
+        let name = document.createElement('h2');
+        name.innerHTML ="City Name: "+ data.name;
+
+        let temp = document.createElement('h2');
+        temp.innerHTML = "Temperature : "+data.main.temp;
+
+        let humidity = document.createElement('h2');
+        humidity.innerHTML = "Humidity : "+data.main.humidity;
+
+        let wind = document.createElement('h2');
+        wind.innerHTML = "Wind: "+data.wind.speed;
+
+        let iframe = document.createElement('iframe');
+        iframe.src = `https://www.google.com/maps/embed/v1/place?q=${data.name}&key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8`
+
+
+        div.append(name,temp,humidity,wind)
+        
+        let container = document.querySelector('.container');
+        container.append(div,iframe);
+
+    }
+}
+
+</script>
+

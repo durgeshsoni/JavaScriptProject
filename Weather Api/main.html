@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+
+    async function getDate(){
+
+        var res = await fetch(`https://api.openweathermap.org/data/2.5/onecall?exclude=daily&units=matric&appid=cfe9e69a7c982e72df3109905e617e43`)
+
+        var data = await res.json()
+        console.log('data:', data)
+
+    }
+    getDate()
+</script>
