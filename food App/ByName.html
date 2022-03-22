@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header"></div>
+    <form action="" id="form">
+        
+        <input type="search" id= 'search' placeholder="Search Movie Name">
+        <button type="submit" id="btn"> Search</button>
+    </form>
+    <div id="section"></div>
+
+</body>
+</html>
+
+<script type="module">
+
+    import navbar from './components/navbar.js';
+
+    let header = document.getElementById('header');
+    header.innerHTML = navbar();
+
+    import {getData,append} from './script.js'
+
+    let btn = document.getElementById('btn');
+    let section = document.getElementById('section');
+    btn.addEventListener('click',async function(e){
+        
+    let search = document.getElementById('search').value;
+        e.preventDefault();
+        let res = await getData(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
+        append(res,section);
+    })  
+
+    
+
+ 
+
+    
+
+</script>
